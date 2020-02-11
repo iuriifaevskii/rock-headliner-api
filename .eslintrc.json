@@ -1,0 +1,21 @@
+{
+	"extends": ["airbnb", "prettier"],
+	"plugins": ["prettier"],
+	"rules": {
+		"import/extensions": [
+			"error",
+			"ignorePackages",
+			{
+				"mjs": "never",
+				"jsx": "never"
+			}
+		]
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".mjs", ".js", ".jsx", ".json"]
+			}
+		}
+	}
+}

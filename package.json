@@ -1,17 +1,27 @@
 {
-  "name": "rock-headliner-api",
-  "type": "module",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node --experimental-modules ./bin/www.mjs",
-    "watch": "nodemon --experimental-modules ./bin/www.mjs"
-  },
-  "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "morgan": "~1.9.1",
-    "nodemon": "^2.0.2"
-  }
+    "name": "rock-headliner-api",
+    "type": "module",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node --experimental-modules ./app.mjs",
+        "watch": "nodemon --experimental-modules ./app.mjs"
+    },
+    "dependencies": {
+        "cookie-parser": "~1.4.4",
+        "debug": "~2.6.9",
+        "express": "~4.16.1",
+        "mongodb": "^3.5.2",
+        "morgan": "~1.9.1",
+        "nodemon": "^2.0.2"
+    },
+    "devDependencies": {
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb": "^18.0.1",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-prettier": "^3.1.2",
+        "prettier": "^1.19.1"
+    }
 }
