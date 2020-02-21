@@ -7,6 +7,8 @@ import debugLib from 'debug';
 import http from 'http';
 import mongodb from 'mongodb';
 
+import './config.mjs';
+
 import indexRouter from './routes/index.mjs';
 import artistRouter from './routes/artist.mjs';
 import festRouter from './routes/fest.mjs';
@@ -17,15 +19,31 @@ const { MongoClient } = mongodb;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '5000');
 
-app.use(logger('dev'));
+if (process.env.NODE_ENV !== 'production') {
+	app.use(logger('dev'));
+}
+
 app.use(express.json());
 app.use(
 	express.urlencoded({
 		extended: false
 	})
 );
+app.use((req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', process.env.FRONT_END_URL);
+	res.setHeader(
+		'Access-Control-Allow-Methods',
+		'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+	);
+	res.setHeader(
+		'Access-Control-Allow-Headers',
+		'X-Requested-With,content-type'
+	);
+	res.setHeader('Access-Control-Allow-Credentials', true);
+	next();
+});
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/', indexRouter);
@@ -36,9 +54,8 @@ app.set('port', port);
 const server = http.createServer(app);
 
 (async () => {
-	const url = 'mongodb://localhost:27017';
 	try {
-		const client = await MongoClient.connect(url, {
+		const client = await MongoClient.connect(process.env.MONGO_CLIENT_URL, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		});

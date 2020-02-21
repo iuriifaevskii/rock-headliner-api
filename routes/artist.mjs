@@ -52,7 +52,7 @@ router.get('/except-for-headliners/:festID', async (req, res) => {
 		return res.send({
 			data: await req.app.locals.artists
 				.find({
-					festID: req.params.festID,
+					festIDs: ObjectID(req.params.festID),
 					isHeadliner: false
 				})
 				.toArray()
@@ -95,7 +95,7 @@ router.get('/headliners/:festID', async (req, res) => {
 		return res.send({
 			data: await req.app.locals.artists
 				.find({
-					festID: req.params.festID,
+					festIDs: ObjectID(req.params.festID),
 					isHeadliner: true
 				})
 				.toArray()
@@ -138,7 +138,7 @@ router.get('/:festID', async (req, res) => {
 		return res.send({
 			data: await req.app.locals.artists
 				.find({
-					festID: req.params.festID
+					festIDs: ObjectID(req.params.festID)
 				})
 				.toArray()
 		});
