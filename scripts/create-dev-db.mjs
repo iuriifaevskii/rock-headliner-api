@@ -9,7 +9,7 @@ const { MongoClient } = mongodb;
 
 (async () => {
 	try {
-		const client = await MongoClient.connect(process.env.MONGO_CLIENT_URL, {
+		const client = await MongoClient.connect(mongoClientURL, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		});
@@ -29,7 +29,6 @@ const { MongoClient } = mongodb;
 			await db.collection(reqCollection.name).insertMany(reqCollection.data);
 		});
 		console.log('collections created and inserted successfully!');
-		process.exit(1);
 	} catch (e) {
 		console.log('can not connect to the db:', e);
 		client.close();
